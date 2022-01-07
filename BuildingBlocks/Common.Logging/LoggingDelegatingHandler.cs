@@ -39,7 +39,7 @@ namespace Common.Logging
             catch (HttpRequestException ex) 
                 when (ex.InnerException is SocketException se && se.SocketErrorCode == SocketError.ConnectionRefused)
             {
-                var hostWithPort = request.RequestUri.IsDefaultPort
+                var hostWithPort = request.RequestUri != null && request.RequestUri.IsDefaultPort
                     ? request.RequestUri.DnsSafeHost
                     : $"{request.RequestUri.DnsSafeHost}:{request.RequestUri.Port}";
 
